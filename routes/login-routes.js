@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.render('dashboard');
-    console.log('this is the dashboard')
+    res.render('login')
+    console.log('this is the login')
 });
 
 module.exports = router;
