@@ -1,4 +1,4 @@
-const { Post } = require('../model');
+const { Post, User } = require('../model');
 
 const getPost = (req, res) => {
     Post.findOne({
@@ -8,25 +8,12 @@ const getPost = (req, res) => {
         attributes: [
             'id',
             'title',
-            'body',
-            'type',
-            'created_at',
+            'user_id',
             // [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
-        // include: [
-        //     {
-        //         model: Comment,
-        //         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        //         include: {
-        //             model: User,
-        //             attributes: ['username']
-        //         }
-        //     },
-        //     {
-        //         model: User,
-        //         attributes: ['username']
-        //     }
-        // ]
+        include: [
+            { model: User, attributes: ['username'] }
+        ]
     })
         .then(dbPostData => {
             if (!dbPostData) {
@@ -47,25 +34,15 @@ const getAllPosts = (req, res) => {
         attributes: [
             'id',
             'title',
-            'body',
-            'type',
-            'created_at',
+            'user_id',
             // [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
-        // include: [
-        //     {
-        //         model: Comment,
-        //         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        //         include: {
-        //             model: User,
-        //             attributes: ['username']
-        //         }
-        //     },
-        //     {
-        //         model: User,
-        //         attributes: ['username']
-        //     }
-        // ]
+        include: [
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
     })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
@@ -76,18 +53,16 @@ const getAllPosts = (req, res) => {
 
 const createPost = (req, res) => {
     // TODO: Add session
-    if (req.session) {
-        Post.create({
-            title: req.body.title,
-            body: req.body.body,
-            user_id: req.session.user_id
-        })
-            .then(dbPostData => res.json(dbPostData))
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    }
+    Post.create({
+        title: req.body.title,
+        user_id: req.body.user_id
+    })
+        .then(dbPostData => res.json(dbPostData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+
 }
 
 const updatePost = (req, res) => {
