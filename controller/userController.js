@@ -1,4 +1,3 @@
-const data = {};
 const { User } = require('../model');
 
 const getUser = (req, res) => {
