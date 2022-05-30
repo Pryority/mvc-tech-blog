@@ -35,13 +35,6 @@ const getAllPosts = (req, res) => {
             'id',
             'title',
             'user_id',
-            // [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
-        include: [
-            {
-                model: User,
-                attributes: ['username']
-            }
         ]
     })
         .then(dbPostData => res.json(dbPostData))
