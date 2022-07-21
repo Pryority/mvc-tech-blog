@@ -1,9 +1,7 @@
-<div class="wrapper">
-    {{> header }}
-    <main>
-        {{> new-post }}
-    </main>
-    <footer>
-    Tech Blog - 2022
-    </footer>
-</div>
+<ol class="post-list">
+  {{#each posts as |post|}}
+  <li>
+    {{> post-info post }}
+  </li>
+  {{/each}}
+</ol>
