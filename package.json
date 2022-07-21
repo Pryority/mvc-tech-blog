@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run watch",
+    "start": "node server.js",
+    "develop": "npm run watch",
     "watch": "nodemon server.js",
     "seeds": "node seeds/index.js"
   },
