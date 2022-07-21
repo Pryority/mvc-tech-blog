@@ -1,7 +1,9 @@
 <div class="wrapper">
     {{> header }}
     <main>
-        
+        {{!-- {{#each blog-post as |post|}} --}}
+        {{> blog-post post}}
+        {{!-- {{/each}} --}}
         <script src="/javascript/home.js"></script>
     </main>
     <footer>

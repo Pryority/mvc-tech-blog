@@ -1,8 +1,10 @@
 <nav class="flex flex-row items-center justify-between">
     <div class="flex flex-row gap-4">                
-        <a href="/" class="text-xl font-medium hover:text-stone-900">dashboard</a>
         <a href="/login" class="text-xl font-medium hover:text-stone-900">login</a>
-        <a href="/logout" class="text-xl font-medium hover:text-stone-900">logout</a>
+        {{#if loggedIn}}
+            <a href="/dashboard" class="text-xl font-medium hover:text-stone-900">dashboard</a>
+            <a href="/logout" class="text-xl font-medium hover:text-stone-900">logout</a>
+        {{/if}}
     </div>
     <div id="user-profile" class="flex flex-row gap-2 items-center">
         <a href="/">username</a>
